@@ -1,0 +1,12 @@
+<%#= @user.name %>
+<%#= current_admin.inspect %>
+<h1>Index Page</h1>
+<hr>
+<%#= @admins.inspect %>
+<% @admins.each do |admin| %> 
+	<h3><%= admin.name %></h3>
+	<%= link_to root_url(:subdomain => admin.name), root_url(:subdomain => admin.name) %></p>
+	<hr>
+<% end %>
+<hr>
+

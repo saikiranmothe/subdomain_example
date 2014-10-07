@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @notary.name %>
+</p>
+
+<p>
+  <strong>Info:</strong>
+  <%= @notary.info %>
+</p>
+
+<%= link_to 'Edit', edit_notary_path(@notary) %> |
+<%= link_to 'Back', notaries_path %>

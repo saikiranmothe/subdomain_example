@@ -1,0 +1,133 @@
+ <%if OrgUser.where(:organization_id => "#{@organization.id}", :user_id=> "#{current_user.id}",:role=>"admin").present? %>
+				<h3 class="text-center"> <%= @organization.name %> Dashboard </h3>
+				<h3 class="pull-left panel"><%= @organization.name %> <h3><br>
+				<hr>
+			  <% @organization.users.each do |user| %>
+					   	<%= user.inspect %>
+				<hr>
+				<% end %>
+				<hr>
+<% else %>
+				<h3>You Dont have access to this Organization Space</h3>
+<% end %>
+
+
+
+==README
+
+
+Organization
+Users
+
+Users  ====many-to_many====== Organizations
+
+When users sign_ups he pick organiation.
+Organization have many users.
+
+
+User have notaries
+
+We need access resources on sub_domain without changing URLs.
+
+===
+Users   ==  Will have roles -->  Admin
+Organizations   === Organization will have sub-domains
+
+
+Flow..
+======
+User sign_up to the application
+
+
+There will be two plans (Select/Enterprise)
+======================== 
+1.User when he sign-ups,Pick one organization.
+3.We generate confirmation email for account.
+2.He will redirected to payment gateway
+3.Once payment is done.
+2.Will generate confirmation email to both application admin/user.
+
+==> Application Admin should approve user ? 
+3.When he will login to Organization Sub-domain.
+4.There he will add users to that organization.
+5.Assign Role to that users while creating.
+6.Depend on their role,they have access to features in app.
+
+
+## Only Organization Admin can see only that organization related notaries.
+## Only he can manage belongs to that organization
+
+
+Roles::
+----------
+Owner/Admin/Manager/Viewer/Author/User
+
+
+Models
+=======
+Users
+Roles
+Organization
+Client
+Notary
+Documents
+
+
+#users
+Users  -----  many_to_many  // -------------> Roles
+User --  has_one  -- role 
+
+
+
+User   -----  belongs_to  -----------------> Organization
+User   -----  has_many -----------------> Clients
+
+
+#role
+Role  ----- many_to_many  ------> users
+
+
+Organization ---- has_many --------------> Users
+user         ---- belongs_to  -------> Organization
+
+Client     ---- has_many   --->  notaries
+notary     --- belongs_to  ---> Client
+
+Notary     --- has_many     --->  documents
+Document   --- belongs_to   ---> Notary
+
+
+Organization  has_many   -----> Users
+User          belongs_to -----> Organization
+User          has_many   -----> Clients
+Users         has_many   -----> Notaries
+
+
+
+
+
+======================================
+<% if user_signed_in? %>
+  <% if current_user.organization_ids.include? @organization.id %>
+
+		<h3> User Dashboard </h3>
+		<%= current_user.email %>
+					<% current_user.organizations.each do |org| %>
+						<%= org.name %>
+							<%= link_to root_url(:subdomain => org.name), root_url(:subdomain => org.name) %></p>
+						<hr>
+				  <% end %>  
+			   <% @organization.users.each do |user| %>
+					   	<%= user.inspect %>
+					   	<hr>
+					<% end %>
+		
+	<% else %>
+		<h3>You Dont have access to this Organization Space</h3>
+	<% end %>
+<% end %>
+
+==============
+
+if user doesnt have organiztion --> clients page
+
