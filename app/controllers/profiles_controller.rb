@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 	
   def show
-    @organization = Organization.where(:domain_name => request.subdomain).first || not_found
+    @organization = Organization.where(:name => request.subdomain).first || not_found
   end
   
   def not_found
@@ -13,6 +13,6 @@ class ProfilesController < ApplicationController
   end
 
   def sample
-      @organization = Organization.where(:domain_name => request.subdomain).first || not_found
+      @organization = Organization.where(:name => request.subdomain).first || not_found
   end
 end

@@ -1,3 +1,4 @@
+
 <h1>Current User :  <%= current_user.email %></h1>
 <hr>
 <h4>User Organizations</h4>
@@ -5,7 +6,7 @@
 <div class="text-center">
 	<% current_user.organizations.each do |org| %>
 				<%= org.name %>
-					<%= link_to root_url(:subdomain => org.domain_name), root_url(:subdomain => org.domain_name) %></p>
+					<%= link_to root_url(:subdomain => org.name), root_url(:subdomain => org.name) %></p>
 				<hr>
 	<% end %>  
 </div>
