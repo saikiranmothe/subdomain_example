@@ -8,6 +8,7 @@ Rails.application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+  config.remote_url = "it-inotary.wijux.com"
   config.host = "it-inotary.wijux.com"
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
