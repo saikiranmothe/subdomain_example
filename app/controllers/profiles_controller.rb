@@ -20,8 +20,9 @@ class ProfilesController < ApplicationController
       @organization = @samplename
     end
     #@domainname  = request.subdomain.chop()
-    @organization = Organization.where(:name => @organization).first || not_found
-
+    #@organization = Organization.where(:name => @organization).first || not_found
+    @organization = @samplename
+    @subdomain =  request.subdomain 
   end
   
   def not_found
