@@ -13,13 +13,8 @@ class ProfilesController < ApplicationController
       @organization = Organization.where(:name => @subdomain).first || not_found
     end
 
-    # if Rails.env.st?
-    #   @domainname = request.subdomain.slice!(".st-inotary")
-    #   @organization = @samplename
-
-    # end
-
     if Rails.env.production?
+      @samplename.slice!(".it-inotary")
       @samplename.slice!(".st-inotary")
       @subdomain = @samplename
       @organization = Organization.where(:name => @subdomain).first || not_found
