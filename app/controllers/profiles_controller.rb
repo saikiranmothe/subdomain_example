@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
       @samplename.slice!(".it-inotary")
       @organization = @samplename
     end
-    
+
     if Rails.env.development?
       @samplename.slice!(".it-inotary")
       @subdomain = @samplename
@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
     # end
 
     if Rails.env.production?
-      @samplename.slice!(".it-inotary")
+      @samplename.slice!(".st-inotary")
       @subdomain = @samplename
       @organization = Organization.where(:name => @subdomain).first || not_found
     end
