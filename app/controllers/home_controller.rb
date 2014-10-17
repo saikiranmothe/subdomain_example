@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
   before_filter :authenticate_user!,:expect => [:shgw]
+
+
+
 	def show
-    @admin = Organization.where(:name => request.subdomain).first || not_found
+    @admin = Organization.where(:name => request.subdomain).first || not_found4
+    @admin 
   end
 
   def not_found

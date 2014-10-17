@@ -1,7 +1,17 @@
 class ProfilesController < ApplicationController
 	
   def show
-    @organization = Organization.where(:name => request.subdomain).first || not_found
+     @samplename = request.subdomain
+    if Rails.env.it?
+      @samplename.slice!(".it-inotary")
+      @organization = @samplename
+    end
+    if Rails.env.st?
+      @domainname = request.subdomain.slice!(".st-inotary")
+    end
+    #@domainname  = request.subdomain.chop()
+    @organization = Organization.where(:name => @organization).first || not_found
+
   end
   
   def not_found

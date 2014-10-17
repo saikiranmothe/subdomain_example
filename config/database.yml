@@ -25,3 +25,12 @@ production:
   <<: *default
   database: db/development.sqlite3
 
+it:
+  <<: *default
+  database: db/development.sqlite3
+
+
+st:
+  <<: *default
+  database: db/development.sqlite3
+
