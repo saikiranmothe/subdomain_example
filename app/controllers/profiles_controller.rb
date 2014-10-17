@@ -6,23 +6,29 @@ class ProfilesController < ApplicationController
       @samplename.slice!(".it-inotary")
       @organization = @samplename
     end
+    
     if Rails.env.development?
       @samplename.slice!(".it-inotary")
-      @organization = @samplename
+      @subdomain = @samplename
+      @organization = Organization.where(:name => @subdomain).first || not_found
     end
-    if Rails.env.st?
-      @domainname = request.subdomain.slice!(".st-inotary")
-      @organization = @samplename
 
-    end
+    # if Rails.env.st?
+    #   @domainname = request.subdomain.slice!(".st-inotary")
+    #   @organization = @samplename
+
+    # end
+
     if Rails.env.production?
-      @domainname = request.subdomain.slice!(".it-inotary")
-      @organization = @samplename
+      @samplename.slice!(".it-inotary")
+      @subdomain = @samplename
+      @organization = Organization.where(:name => @subdomain).first || not_found
     end
-    #@domainname  = request.subdomain.chop()
-    #@organization = Organization.where(:name => @organization).first || not_found
-    @organization = @samplename
-    @subdomain =  request.subdomain 
+
+    # #@domainname  = request.subdomain.chop()
+    # #@organization = Organization.where(:name => @organization).first || not_found
+    # @organization = @samplename
+    # @subdomain =  request.subdomain 
   end
   
   def not_found
